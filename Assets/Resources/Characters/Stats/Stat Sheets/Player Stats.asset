@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21274167cf368b24a97be97afc35b4a9, type: 3}
+  m_Name: Player Stats
+  m_EditorClassIdentifier: 
+  resourceStats:
+  - stat: {fileID: 11400000, guid: 4b1eb720750497a438858a39330fd0cb, type: 2}
+    maxValue: 100
+  - stat: {fileID: 11400000, guid: fa64bdb80b4f15f4784752003fc2d476, type: 2}
+    maxValue: 50
+  - stat: {fileID: 11400000, guid: 4f2edb1f590ea2045b38ea387ad11018, type: 2}
+    maxValue: 40
+  intStats:
+  - stat: {fileID: 11400000, guid: 920af2bda25947549add97b3dcc1e12b, type: 2}
+    value: 20
+  - stat: {fileID: 11400000, guid: edc076baf64708a41aecbbc1d459cd0e, type: 2}
+    value: 0
+  - stat: {fileID: 11400000, guid: 016c0a322e456b443ae40c19175f1697, type: 2}
+    value: 0
+  harvestSkills:
+  - {fileID: 11400000, guid: 32fb4172828afc64483a93a1e2084dea, type: 2}
+  - {fileID: 11400000, guid: 77aa64804ebb7454f89abd97ea8aabb3, type: 2}
+  - {fileID: 11400000, guid: 4e4a336d7fb0d8144b12c0d847e1bbe5, type: 2}

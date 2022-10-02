@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139e3f0bd77be6349b62b03047198961, type: 3}
+  m_Name: Barrel Inventory
+  m_EditorClassIdentifier: 
+  inventoryName: Barrel
+  width: 4
+  height: 6
+  stackModifier: 0
+  inventorySprite: {fileID: 21300000, guid: 484cc2c8913c0b944a09ad2f0173c850, type: 3}
+  slotSprite: {fileID: 21300000, guid: d171ce27d5d8059478524e5aa0fd74c3, type: 3}
+  closeSprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  validItems: -1

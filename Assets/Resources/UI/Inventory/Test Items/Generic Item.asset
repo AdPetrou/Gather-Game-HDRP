@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4ca6d58ec3e7842baa894209b2000b, type: 3}
+  m_Name: Generic Item
+  m_EditorClassIdentifier: 
+  itemName: GenericItem
+  itemIcon: {fileID: 21300000, guid: 484cc2c8913c0b944a09ad2f0173c850, type: 3}
+  gridBounds:
+    a: 1
+    b: 1
+  stackMax: 10
+  itemFont: {fileID: 11400000, guid: 01e9c4e148ef2d248b2222c14696cd23, type: 2}

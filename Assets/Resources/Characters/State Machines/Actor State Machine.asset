@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6386412c7b8c0194395285f8a96948a2, type: 3}
+  m_Name: Actor State Machine
+  m_EditorClassIdentifier: 
+  states:
+  - {fileID: 11400000, guid: 13797039afbd7c141b1b02eae56a1fc3, type: 2}
+  - {fileID: 11400000, guid: 0afbbd20efcf3784eb4ae44fa0fa7ddd, type: 2}
+  - {fileID: 11400000, guid: 40fcbe406170c44499f4173118614fc6, type: 2}
+  - {fileID: 11400000, guid: 4800d108cc0a38d48b0f1b3ed96472b3, type: 2}
+  - {fileID: 11400000, guid: 9ab2446e844e9084fb2701bcfb7c86c5, type: 2}
+  - {fileID: 11400000, guid: c1d4ab6c63acd8343a680f67c3e3f31d, type: 2}
+  - {fileID: 11400000, guid: 21eb1c870ac98c84e9dcd0eed53be2af, type: 2}
