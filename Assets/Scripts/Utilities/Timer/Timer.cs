@@ -39,7 +39,8 @@ namespace GatherGame.Timers
     // This will function the same as TimerList but will be limited to only one object
     public interface IThreadedTimer<T>
     {
-
+        public ThreadedTimer<T> Timer { get; }
+        public void ProcessTimer();
     }
 
     public interface IThreadedTimerList<T>
@@ -51,14 +52,30 @@ namespace GatherGame.Timers
 
     public class ThreadedTimer<T> : ThreadedTimerList<T>
     {
-        
+        public T result 
+        { get { if (results.Count > 0) return results.Dequeue(); 
+                else throw(new NullReferenceException()); } }
+
+        [Obsolete("Use [result] instead", true)]
+        public override Queue<T> results { get; protected set; } = new Queue<T>();
+
+        public ThreadedTimer()
+        {
+            objList = new List<Tuple<T, int>>(1);
+            TimerThread.Instance.AddThreadedObject(this);
+        }
+        public override void CreateTimer(T obj, float time)
+        {
+            objList.Clear();
+            base.CreateTimer(obj, time);
+        }
     }
 
     public class ThreadedTimerList<T> : IThreadedTimerHack
     {
         public int ID { get; set; }
-        public Queue<T> results { get; protected set; } = new Queue<T>();
-        private List<Tuple<T, int>> objList = new List<Tuple<T, int>>();
+        public virtual Queue<T> results { get; protected set; } = new Queue<T>();
+        protected List<Tuple<T, int>> objList = new List<Tuple<T, int>>();
         // To avoid messy casting and Generic Lists the Timer Thread only accepts integer Timers
         // This list will store the return object as a tuple coupled with an Int which is used as an ID
         // When the timer is created it will return the ID which can then be processed and added to the queue
@@ -71,7 +88,7 @@ namespace GatherGame.Timers
             TimerThread.Instance.AddThreadedObject(this);
         }
 
-        public void CreateTimer(T obj, float time) // This will queue the timer to activate
+        public virtual void CreateTimer(T obj, float time) // This will queue the timer to activate
         {
             int listIndex = GetUniqueIndex();
             objList.Add(Tuple.Create(obj, listIndex));

@@ -10,7 +10,8 @@ namespace GatherGame.Interaction
     public class HarvestableObject : InteractableObject
     {
         #region Variables
-        public HarvestDrop[] items;
+        [SerializeField]
+        internal HarvestDrop[] items;
 
         public override void OnValidate()
         {
@@ -36,7 +37,7 @@ namespace GatherGame.Interaction
         #region Methods
         public override GameObject interact(GameObject gameObject)
         {
-            gameObject.GetComponent<Renderer>().enabled = false;
+            gameObject.SetActive(false);
             InteractionManager.Instance.Timer.CreateTimer(gameObject, respawnTime);
 
             //for (int i = 0; i < items.Length; i++)           
@@ -54,7 +55,7 @@ namespace GatherGame.Interaction
         #endregion
 
         [System.Serializable]
-        public struct HarvestDrop
+        internal struct HarvestDrop
         {
             public HarvestableItem item;
             public int minDrop, maxDrop;

@@ -64,7 +64,7 @@ namespace GatherGame.Interaction
         public void ProcessTimer()
         {
             GameObject gameObject = Timer.results.Dequeue();
-            gameObject.GetComponent<Renderer>().enabled = true;
+            gameObject.SetActive(true);
         }
 
         private void OnApplicationQuit()

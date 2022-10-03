@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3639d14e85994d0429ff76302ac6c4eb, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1569836545620281015, guid: 60304dda9026d994daa53d9f0a2051bc, type: 3}
+  Layer: 6
+  prefab: {fileID: 1809221509254096, guid: afbb2b508d079274db9696dcb6658dd4, type: 3}
   type: 9
   expGain: 500
   harvestTime: 5
   respawnTime: 240
-  harvestDistance: 2
+  harvestDistance: 4
   items:
   - item: {fileID: 11400000, guid: d582a6493eab21f4ba9c1b2ca2ce92dc, type: 2}
-    dropBounds:
-      a: 1
-      b: 2
+    minDrop: 1
+    maxDrop: 3
