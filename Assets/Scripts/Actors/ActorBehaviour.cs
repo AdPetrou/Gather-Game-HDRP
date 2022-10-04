@@ -79,7 +79,7 @@ namespace GatherGame.Actors
                 {
                     RaycastHit hit = sphereCastResult[i];
                     // These conditions should be met if the object can be interacted
-                    if (hit.transform && hit.transform.tag[0] == '~' && hit.transform.GetComponent<Renderer>().enabled)
+                    if (hit.transform && hit.transform.tag[0] == '~')
                     {
                         //Debug.DrawRay(command[i].origin, hit.transform.position, Color.green, 2f);
                         float distance = (command[i].origin - hit.transform.position).sqrMagnitude;
@@ -327,7 +327,7 @@ namespace GatherGame.Actors
             },
             scanRadius);
 
-            StartCoroutine(findClosestInteractable.RunJob // Delegates get the result from the coroutine and set it
+            StartCoroutine(findClosestInteractable.RunJob // Delegate gets the result from the coroutine and sets it
                 (newObject => { interactableObject = newObject;}, finished => { commandRunning = false; }));
         }
 

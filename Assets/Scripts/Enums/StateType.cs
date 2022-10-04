@@ -1,7 +1,7 @@
 public enum StateType 
 {
 	Idle = 0,
-	Gather = 1,
+	Interact = 1,
 	TurnLeft = 2,
 	TurnRight = 3,
 	Walk = 4,

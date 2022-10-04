@@ -767,9 +767,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1144490310163868, guid: 4eca3673cd588b44194e45fad5c1fd17, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 1424707916247682, guid: 4eca3673cd588b44194e45fad5c1fd17, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1424707916247682, guid: 4eca3673cd588b44194e45fad5c1fd17, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
       objectReference: {fileID: 0}
     - target: {fileID: 1653558279864992, guid: 4eca3673cd588b44194e45fad5c1fd17, type: 3}
       propertyPath: m_Name
@@ -786,6 +794,10 @@ PrefabInstance:
     - target: {fileID: 1761475294796422, guid: 4eca3673cd588b44194e45fad5c1fd17, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761475294796422, guid: 4eca3673cd588b44194e45fad5c1fd17, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
       objectReference: {fileID: 0}
     - target: {fileID: 4406029685088096, guid: 4eca3673cd588b44194e45fad5c1fd17, type: 3}
       propertyPath: m_RootOrder
@@ -1852,13 +1864,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1111779052209142, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 1198709090226966, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1198709090226966, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 1841031902324010, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841031902324010, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
       objectReference: {fileID: 0}
     - target: {fileID: 4260073866711574, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
       propertyPath: m_RootOrder
@@ -2021,6 +2045,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1093770817417120, guid: afbb2b508d079274db9696dcb6658dd4, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 1809221509254096, guid: afbb2b508d079274db9696dcb6658dd4, type: 3}
       propertyPath: m_Name
       value: prefab_s_rock_06
@@ -2032,6 +2060,10 @@ PrefabInstance:
     - target: {fileID: 1896913327367820, guid: afbb2b508d079274db9696dcb6658dd4, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896913327367820, guid: afbb2b508d079274db9696dcb6658dd4, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
       objectReference: {fileID: 0}
     - target: {fileID: 4846866166455374, guid: afbb2b508d079274db9696dcb6658dd4, type: 3}
       propertyPath: m_RootOrder
@@ -2146,9 +2178,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1023960836249886, guid: 9571a631b852038429d41f5c4dc92bf3, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 1288414687118266, guid: 9571a631b852038429d41f5c4dc92bf3, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288414687118266, guid: 9571a631b852038429d41f5c4dc92bf3, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
       objectReference: {fileID: 0}
     - target: {fileID: 1332372872139496, guid: 9571a631b852038429d41f5c4dc92bf3, type: 3}
       propertyPath: m_Name
@@ -2165,6 +2205,10 @@ PrefabInstance:
     - target: {fileID: 1505031995050210, guid: 9571a631b852038429d41f5c4dc92bf3, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1505031995050210, guid: 9571a631b852038429d41f5c4dc92bf3, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
       objectReference: {fileID: 0}
     - target: {fileID: 4663342412517646, guid: 9571a631b852038429d41f5c4dc92bf3, type: 3}
       propertyPath: m_RootOrder
@@ -2726,13 +2770,25 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1111779052209142, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 1198709090226966, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1198709090226966, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 1841031902324010, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841031902324010, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
+      propertyPath: m_TagString
+      value: ~Stone
       objectReference: {fileID: 0}
     - target: {fileID: 4260073866711574, guid: 80b21438fa390444080d7965894dc7cd, type: 3}
       propertyPath: m_RootOrder

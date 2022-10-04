@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89f95600fab0ece40a51cde4c5f825b1, type: 3}
-  m_Name: Gather
+  m_Name: Interact
   m_EditorClassIdentifier: 
   stateRef: 1
   defaultStateAnimation: {fileID: -1084222336019790001, guid: cea4ea7d916d4984bbcb983550cc0f42, type: 3}

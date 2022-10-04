@@ -5,15 +5,15 @@ using UnityEngine;
 
 namespace GatherGame.Actors
 {
-    [CreateAssetMenu(fileName = "Gather State", menuName = "State Machine/States/Actor States/Gather State")]
-    public class GatherState : State
+    [CreateAssetMenu(fileName = "Interact State", menuName = "State Machine/States/Actor States/Interact State")]
+    public class InteractState : State
     {
         public override void Main(ActorBehaviour behaviour)
         {
-            StaticCoroutine.Start(Harvest(behaviour));
+            StaticCoroutine.Start(Interact(behaviour));
         }
 
-        protected IEnumerator Harvest(ActorBehaviour behaviour)
+        protected IEnumerator Interact(ActorBehaviour behaviour)
         {
             behaviour.canChangeSwitch(false);
             GameObject obj = behaviour.interactableObject;
@@ -28,8 +28,8 @@ namespace GatherGame.Actors
 
             //behaviour.LookAtPosition(obj.transform.position);
 
-            Animate(behaviour.animationController, thisObject.harvestTime / 4f);
-            yield return new WaitForSeconds(thisObject.harvestTime);
+            Animate(behaviour.animationController, thisObject.interactTime / 4f);
+            yield return new WaitForSeconds(thisObject.interactTime);
             thisObject.interact(obj);
             // This calls the Behaviour to run the Raycast Job again to reset the closest Interactable Object
             behaviour.GetInteractableObject(true); 

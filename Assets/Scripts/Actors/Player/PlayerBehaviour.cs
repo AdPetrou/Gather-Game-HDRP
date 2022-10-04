@@ -67,7 +67,7 @@ namespace GatherGame.Actors.Player
         public void HarvestObject(InputAction.CallbackContext context)
         {
             if (context.started && canChange)
-                ChangeState(StateType.Gather);
+                ChangeState(StateType.Interact);
         }
 
         public static IEnumerator disableMovement(float time)

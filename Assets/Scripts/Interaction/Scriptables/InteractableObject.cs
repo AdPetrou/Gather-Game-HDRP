@@ -13,7 +13,7 @@ namespace GatherGame.Interaction
         public SkillType type = SkillType.None;
         public float expGain;
         [Header("--Harvest Data--")]
-        public int harvestTime;
+        public int interactTime;
         public int respawnTime;
         public float harvestDistance;
 

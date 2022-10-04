@@ -18,7 +18,7 @@ MonoBehaviour:
   expGain: 500
   harvestTime: 5
   respawnTime: 240
-  harvestDistance: 4
+  harvestDistance: 8
   items:
   - item: {fileID: 11400000, guid: d582a6493eab21f4ba9c1b2ca2ce92dc, type: 2}
     minDrop: 1

@@ -44,8 +44,8 @@ namespace GatherGame.UI
             if (behaviour.interactableObject)
             {
                 enableHarvestUI(behaviour.interactableObject.transform.position + Vector3.up);
-                if (behaviour.CurrentState.StateRef == StateType.Gather)
-                    runHarvestUI(Interaction.InteractionManager.Instance.GetObjectFromTag(behaviour.interactableObject.tag).harvestTime);
+                if (behaviour.CurrentState.StateRef == StateType.Interact)
+                    runHarvestUI(Interaction.InteractionManager.Instance.GetObjectFromTag(behaviour.interactableObject.tag).interactTime);
             }
             else
                 disableHarvestUI();
