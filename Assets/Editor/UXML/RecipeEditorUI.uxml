@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="Field" view-data-key="DoViewQ" style="height: auto; -unity-background-scale-mode: stretch-to-fill; width: 80%; left: 10%;">
+        <ui:VisualElement style="width: 60%; left: 5%;">
+            <ui:GroupBox style="height: 25px; width: 50%; border-left-color: rgb(36, 36, 36); border-right-color: rgb(36, 36, 36); border-top-color: rgba(36, 36, 36, 0); border-bottom-color: rgb(36, 36, 36); background-color: rgba(0, 0, 0, 0); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; align-items: flex-start; left: -0.5%; top: -1.5%;">
+                <ui:Button text="Remove Component" display-tooltip-when-elided="true" name="RemoveComponent" style="align-items: auto; width: 50%; left: 50%; top: auto; position: absolute;" />
+                <ui:Button text="Add Component" display-tooltip-when-elided="true" name="AddComponent" style="align-items: flex-start; width: 50%; white-space: nowrap; -unity-text-align: middle-center; position: absolute; min-width: auto;" />
+            </ui:GroupBox>
+            <ui:VisualElement name="Items" view-data-key="DoWorkBoo" style="width: auto; max-width: none; min-width: 600px; min-height: 300px; background-color: rgba(0, 0, 0, 0); -unity-background-scale-mode: stretch-to-fill; align-items: flex-start; justify-content: center; flex-direction: column; left: auto;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Result" style="left: 70%; top: 25%; width: 20%; height: auto; -unity-background-scale-mode: stretch-to-fill; align-items: flex-end; justify-content: center; position: absolute;">
+            <ui:TextField picking-mode="Ignore" value="+" text="=" readonly="true" name="TextField" style="max-width: 10%; right: auto; left: -10%; font-size: 18px; align-items: center; justify-content: center; top: 50%; width: 18px; -unity-text-align: middle-center; flex-basis: auto; -unity-font-style: normal; height: 24px; position: absolute;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
