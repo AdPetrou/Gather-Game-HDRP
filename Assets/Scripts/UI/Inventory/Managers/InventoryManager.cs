@@ -2,93 +2,66 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using GatherGame.Utilities;
-using GatherGame.Inventory.Behaviour;
-using GatherGame.Inventory.Scriptables;
-
-public enum ItemType
-{
-    Generic = -1,
-    Harvesting = 0,
-    Mining = 1,
-}
 
 namespace GatherGame.Inventory
 {
     public class InventoryManager : Singleton<InventoryManager>
     {
-        #region Static Variables
-        public static List<InventoryBehaviour> inventories;
-        public static float offset = 50;
-        public static ItemBehaviour currentItem;
-        public static InventoryBehaviour currentBackpack;
-        public static InventoryBehaviour selectedInventory;
-        #endregion
         #region Variables
-        private InventoryScriptable[] backpackScriptables;
+        public int inventoryScale { get; private set; } = 50;
+        public List<InventoryBehaviour> inventories { get; } = new List<InventoryBehaviour>();
+        public InventoryBehaviour currentInventory { get; private set; }
+        public GameObject itemCanvas { get; private set; }
         #endregion
 
         #region Unity Functions
         // Start is called before the first frame update
         void Start()
         {
-            currentItem = null; currentBackpack = null;
-            inventories = new List<InventoryBehaviour>();
-            backpackScriptables = Resources.LoadAll<InventoryScriptable>("UI/Inventory/Backpacks").ToArray();
-
-            currentBackpack = backpackScriptables[0].createInventory().GetComponent<InventoryBehaviour>();
-            currentBackpack.transform.SetParent(GameObject.Find("Persistant").transform);
-            currentBackpack.transform.localPosition = new Vector2(0, 0);
-            currentBackpack.closeInventory(false);
-
-            selectedInventory = currentBackpack;
+            itemCanvas = GameObject.Find("Item Canvas");
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (currentItem == null)
-                return;
+            
         }
         #endregion
 
         #region Methods
-
-
-        #region Utilities
-        public ItemClass getClassFromObject(GameObject obj)
+        public int GetUniqueID()
         {
-            foreach (ItemClass C in Resources.LoadAll<ItemClass>(""))
-                if (C.itemName == obj.name)
-                    return C;
-
-            return null;
+            int i = 0;
+            foreach (InventoryBehaviour inventory in inventories)
+                if (inventory.index > i)
+                    i = inventory.index + 1;
+            return i;
         }
 
-        public InventoryBehaviour findClosestInventory(ItemBehaviour item)
+        public void InventoryToTop(InventoryBehaviour selectedInventory)
         {
-            InventoryBehaviour[] inventories = FindObjectsOfType<InventoryBehaviour>();
-            InventoryBehaviour currentClosest = null;
-            foreach(InventoryBehaviour i in inventories)
-            {
-                if (currentClosest == null)
-                    currentClosest = i;
+            foreach (InventoryBehaviour inventory in inventories)
+                if(inventory.gameObject.activeSelf)
+                    inventory.transform.parent.GetComponent<Canvas>().sortingOrder = 0;
 
-                if (Vector2.Distance(item.transform.position, i.transform.position)
-                    < Vector2.Distance(item.transform.position, currentClosest.transform.position))
-                    currentClosest = i;
-            }
-
-            return currentClosest;
+            selectedInventory.transform.parent.GetComponent<Canvas>().sortingOrder = 1;
+            currentInventory = selectedInventory;
+            return;
         }
 
-        public InventoryBehaviour getInventory(int index)
+        public InventoryBehaviour GetClosestInventory(Vector2 position)
         {
-            if (index > inventories.Count)
-                return null;
+            InventoryBehaviour returnValue = currentInventory;
+            foreach(InventoryBehaviour inventory in inventories)
+                if (inventory.gameObject.activeSelf)
+                {
+                    if(Vector2.Distance(position, inventory.transform.position) < 
+                        Vector2.Distance(position, returnValue.transform.position))
+                        returnValue = inventory;
+                }
 
-            return inventories[index];
+            return returnValue;
         }
-        #endregion
         #endregion
     }
 }

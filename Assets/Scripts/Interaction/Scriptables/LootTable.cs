@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GatherGame.Inventory.Scriptables 
+namespace GatherGame.Inventory 
 {
     [System.Serializable]
     public struct LootDistribution
     {
-        public ItemClass item;
+        public ItemScriptable item;
         public int distribution;
 
-        public LootDistribution(ItemClass _item, int _distribution)
+        public LootDistribution(ItemScriptable _item, int _distribution)
         {
             item = _item;
             distribution = _distribution;
@@ -66,7 +66,7 @@ namespace GatherGame.Inventory.Scriptables
             return tempTable;
         }
 
-        public ItemClass getRandomItem()
+        public ItemScriptable getRandomItem()
         {
             int index = getRandomNumber();
             for(int i = 0; i < accessTable.Length; i++)

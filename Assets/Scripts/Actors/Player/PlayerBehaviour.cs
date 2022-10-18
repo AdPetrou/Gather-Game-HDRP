@@ -9,12 +9,14 @@ namespace GatherGame.Actors.Player
     {
         #region Variables
         bool jogToggle = false;
+        public Inventory.InventoryScriptable tempBackpack;
         #endregion
 
         #region Unity Functions
         public override void Awake()
         {
             base.Awake();
+            tempBackpack.CreateInventory(transform);
         }
 
         // Update is called once per frame

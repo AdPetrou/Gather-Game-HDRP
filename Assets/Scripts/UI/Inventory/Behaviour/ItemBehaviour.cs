@@ -1,24 +1,39 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using GatherGame.Utilities;
 using GatherGame.UI;
+using System.Collections.Generic;
+using UnityEditor.Sprites;
 
-namespace GatherGame.Inventory.Behaviour
+namespace GatherGame.Inventory
 {
     public class ItemBehaviour : DraggableUI
     {
         #region Variables
-        public ItemType itemType;
-        public System.Tuple<int, int> objectSize { get; protected set; }
-        protected System.Tuple<int, int> previousPos;
-        public Vector2 itemOffset;
-        public RectTransform rectTransform { get; protected set; }
+        public Tuple<InventoryBehaviour, List<Tuple<int, int>>> usedSlots { get; protected set; }
+        /* The usedSlots take the inventory and the position of all the slots the item inhibits, as a tuple.
+        The list of slots is used in the inventory to check if a slot is filled when adding or moving other items. */
+        public void SetUsedSlots(InventoryBehaviour inventory, List<Tuple<int, int>> usedSlots)        
+        { this.usedSlots = Tuple.Create(inventory, usedSlots); }
+        // SetUsedSlots for encapsulaion so the data doesn't accidentally get edited.
+        protected Tuple<InventoryBehaviour, List<Tuple<int, int>>> previousPos;
+        // previousPos is set when the object is picked up and used if the new position is invalid.
 
-        public virtual void setStats(Scriptables.ItemClass scriptable)
+        private int width, height;
+        public Tuple<int, int> objectSize { get { return Tuple.Create(width, height); } }
+        // the tuple is mostly for convinicence
+
+        protected RectTransform rectTransform;
+        protected Vector2 itemOffset { get { return new Vector2((width - 1) / 2f, (height - 1) / 2f); } }
+        // (width - 1) / 2 && (height - 1) / 2, is the offset from the middle of the object
+
+        public virtual void SpawnItem(ItemScriptable scriptable, InventoryBehaviour inventory)
         {
-            itemType = ItemType.Generic;
-            objectSize = System.Tuple.Create(scriptable.width, scriptable.height);
-            itemOffset = scriptable.itemOffset;
+            width = scriptable.objectSize.Item1; height = objectSize.Item2;
+            bool success = inventory.AddItemToSlot(this);
+            if(success)
+                rectTransform.localPosition = GetPosition();
         }
         #endregion
 
@@ -33,117 +48,74 @@ namespace GatherGame.Inventory.Behaviour
         #region Event System
         public override void OnPointerDown(PointerEventData eventData)
         {
-            InventoryManager.currentItem = this;
-            InventoryManager.selectedInventory = transform.GetComponentInParent<InventoryBehaviour>(true);
-            previousPos = getPositionIndex(InventoryManager.selectedInventory);
-            setPriority();
+            previousPos = usedSlots;
+            usedSlots = Tuple.Create<InventoryBehaviour, List<Tuple<int, int>>>(null, null);
+            transform.SetParent(InventoryManager.Instance.itemCanvas.transform, true);
+            transform.SetAsLastSibling();   
             base.OnPointerDown(eventData);
-
-            // Previous Position calculated so it knows what to snap back to should it fail
-        }
-        private void setPriority()
-        {
-            transform.SetAsLastSibling();
-            transform.parent.parent.SetAsLastSibling();
-            transform.parent.parent.parent.SetAsLastSibling();
         }
 
         public override void OnPointerUp(PointerEventData eventData)
         {
-            if (InventoryManager.currentItem == null || InventoryManager.currentBackpack == null)
-                return;
+            InventoryBehaviour inventory = InventoryManager.Instance.currentInventory;
+            bool success = AddToInventory(inventory, eventData);
+            if (!success)
+            {
+                inventory = InventoryManager.Instance.GetClosestInventory(Input.mousePosition);
+                success = AddToInventory(inventory, eventData);
+                if (!success)
+                    previousPos.Item1.AddItemToSlot(this, previousPos.Item2);
+            }
+            rectTransform.localPosition = GetPosition();
+        }
 
-            InventoryBehaviour inventory = getInventoryToAdd();
-            System.Tuple<int, int> newPos = getPositionIndex(inventory);
+        protected virtual bool AddToInventory(InventoryBehaviour inventory, PointerEventData eventData)
+        {
+            var itemOffset = GetItemOrigin(eventData);
+            var origin = inventory.GetPositionFromVector(Input.mousePosition, true);
 
-            if (inventory != InventoryManager.selectedInventory || !previousPos.Equals(newPos))
-                addItem(newPos, inventory);
+            return inventory.AddItemToSlot(this, origin, itemOffset);
+        }
+
+        private Queue<Tuple<int, int>> GetItemOrigin(PointerEventData eventData = null)
+        {
+            Vector2 origin;
+            if (eventData != null)
+                origin = offset / InventoryManager.Instance.inventoryScale + itemOffset;
             else
-                returnItem();
+                origin = Vector2.one;
 
-            InventoryManager.currentItem = null;
+            Queue<Tuple<int, int>> returnResult = new Queue<Tuple<int, int>>();
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
+                {
+                    //Debug.Log((x - Mathf.FloorToInt(origin.x)) + " " + (y - Mathf.FloorToInt(origin.y)));
+                    returnResult.Enqueue(Tuple.Create(x - Mathf.RoundToInt(origin.x), y - Mathf.RoundToInt(origin.y)));
+                }
+
+            return returnResult;
         }
         #endregion
 
         #region Methods
-        private InventoryBehaviour getInventoryToAdd()
+
+        public Vector2 GetPosition()
         {
-            System.Tuple<int, int> newPos = getPositionIndex(InventoryManager.selectedInventory);
+            if (usedSlots.Item2 == null || usedSlots.Item2.Count <= 0)
+                return Vector2.zero;
 
-            if (InventoryManager.selectedInventory.outOfBounds(newPos, objectSize))
-                return InventoryManager.Instance.findClosestInventory(this);
-
-            return InventoryManager.selectedInventory;
-        }
-        public virtual void addItem(System.Tuple<int, int> newPos, InventoryBehaviour newInv)
-        {           
-            InventoryManager.selectedInventory.clearGrid(previousPos, objectSize);
-
-            transform.SetParent(newInv.transform.GetChild(newInv.transform.childCount - 1));
-            transform.SetAsLastSibling();
-
-            if (newInv.addItemToSlot(gameObject, newPos, itemOffset)) return;
-
-            if (newInv.outOfBounds(getPositionIndex(newInv), objectSize))
-                UIManager.playerUI.enableDropItemPopup(this);
-
-            returnItem();
-        }
-
-        public virtual void returnItem()
-        {
-            InventoryManager.selectedInventory.clearGrid(previousPos, objectSize);
-            InventoryManager.selectedInventory.addItemToSlot(gameObject, previousPos, itemOffset);
-        }
-
-        #region Utilities
-        public Vector3 getCornerPosition()
-        {
-            Vector3[] corners = new Vector3[4];
-            rectTransform.GetLocalCorners(corners);
-            return corners[0] + new Vector3(InventoryManager.offset / 2, InventoryManager.offset / 2);
-
-            // Gets the local corner of the object so the grid width and height can be calculated properly when adding an item to the backpack,
-            // The extra Vector has to be added to allow some room between the slots and remove this effect for small items,
-            // Fuck me this took ages I'm really dumb and shouldn't be making games lol.
-        }
-
-        public System.Tuple<int, int> getPositionIndex(InventoryBehaviour inventory)
-        {
-            Vector3 pos = transform.localPosition;
-            Transform itemChild = inventory.transform.GetChild(inventory.transform.childCount - 1);
-            if (itemChild != transform.parent)
+            int xCorner = usedSlots.Item2[0].Item1, yCorner = usedSlots.Item2[0].Item2;
+            foreach (var slot in usedSlots.Item2)
             {
-                Transform currentTransform = transform;
-                transform.SetParent(itemChild);
-                pos = transform.localPosition;
-                transform.SetParent(currentTransform);
+                if (slot.Item1 < xCorner)
+                    xCorner = slot.Item1;
+                if (slot.Item2 < yCorner)
+                    yCorner = slot.Item2;
             }
 
-            //Debug.Log(roundPositionToOffset(pos + getCornerPosition()).a + " " 
-              //  + roundPositionToOffset(pos + getCornerPosition()).b);
-            return roundPositionToOffset(pos + getCornerPosition());
+            return (new Vector2(xCorner, yCorner) + itemOffset)
+                * InventoryManager.Instance.inventoryScale;
+            #endregion
         }
-
-        public System.Tuple<int, int> roundPositionToOffset(Vector3 position)
-        {
-            float offset = InventoryManager.offset;
-            //Rounds to the nearest int for the bool array
-            return new System.Tuple<int, int>
-            (Mathf.RoundToInt(position.x / offset),
-            Mathf.RoundToInt(position.y / offset));
-        }
-
-        public void destroyItem(InventoryBehaviour inventory, bool atPrevious = false)
-        {
-            if (atPrevious)
-                inventory.clearGrid(previousPos, objectSize);
-            else
-                inventory.clearGrid(getPositionIndex(inventory), objectSize);
-
-            Destroy(gameObject);
-        }
-        #endregion
-        #endregion
     }
 }

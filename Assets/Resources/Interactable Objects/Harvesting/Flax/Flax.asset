@@ -16,7 +16,7 @@ MonoBehaviour:
   prefab: {fileID: 6948537303117090757, guid: a7555fd7490dcba42a80cb8127d6b719, type: 3}
   type: 7
   expGain: 500
-  harvestTime: 2
+  interactTime: 3
   respawnTime: 15
   harvestDistance: 2
   items:

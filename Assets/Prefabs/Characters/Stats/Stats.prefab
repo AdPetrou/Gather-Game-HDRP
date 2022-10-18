@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4126584921251060560}
   - component: {fileID: 2148229878323198914}
   - component: {fileID: 6058473569013201365}
-  - component: {fileID: 6495373385869940729}
+  - component: {fileID: 4828904454742544809}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6495373385869940729
+--- !u!114 &4828904454742544809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,11 +87,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1461696843212663355}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b418fa70e990fb44931de8d65198dc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 56033ffec2235f54a9db07b3601f66af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
-  height: {x: 0, y: 0, z: 0}
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4828904454742544809}
+          m_TargetAssemblyTypeName: GatherGame.UI.DraggableUI, Game
+          m_MethodName: SetObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8773237573882413062}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  obj: {fileID: 0}
 --- !u!1 &6104491273159514186
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +119,7 @@ GameObject:
   - component: {fileID: 14176175221802498}
   - component: {fileID: 7499162104093659699}
   - component: {fileID: 2151319796443119323}
-  - component: {fileID: 7710854773675112577}
+  - component: {fileID: 8426098607005755879}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -169,7 +185,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7710854773675112577
+--- !u!114 &8426098607005755879
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,10 +194,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6104491273159514186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 386117cead9b732419124b19e1be736a, type: 3}
+  m_Script: {fileID: 11500000, guid: c1c84f6c44b49684ba37e5ff3aab3a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8426098607005755879}
+          m_TargetAssemblyTypeName: GatherGame.UI.CloseUI, Game
+          m_MethodName: SetObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8773237573882413062}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  obj: {fileID: 0}
 --- !u!1 &8773237572843364693
 GameObject:
   m_ObjectHideFlags: 0

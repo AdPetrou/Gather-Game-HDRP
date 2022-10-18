@@ -56,8 +56,11 @@ namespace GatherGame.Timers
         { get { if (results.Count > 0) return results.Dequeue(); 
                 else throw(new NullReferenceException()); } }
 
+
         [Obsolete("Use [result] instead", true)]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         public override Queue<T> results { get; protected set; } = new Queue<T>();
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
 
         public ThreadedTimer()
         {

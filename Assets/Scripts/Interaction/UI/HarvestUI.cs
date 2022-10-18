@@ -6,18 +6,19 @@ namespace GatherGame.UI
 {
     public class HarvestUI : MonoBehaviour
     {
-        public void enable(Vector3 position)
+        public void Enable(Vector3 position)
         {
             gameObject.SetActive(true);
             transform.position = position;
             transform.LookAt(Camera.main.transform);
         }
-        public void disable()
+        public void Disable()
         {
+            EmptyHarvest();
             gameObject.SetActive(false);
         }
 
-        public IEnumerator fillUI(int harvestTime)
+        public IEnumerator FillUI(int harvestTime)
         {
             Image fill = transform.GetChild(0).GetComponent<Image>();
             float t = 0f;
@@ -30,11 +31,11 @@ namespace GatherGame.UI
                 yield return null;
             }
 
-            emptyHarvest();
+            EmptyHarvest();
             yield break;
         }
 
-        public void emptyHarvest()
+        public void EmptyHarvest()
         {
             transform.GetChild(0).GetComponent<Image>().fillAmount = 0f;
         }

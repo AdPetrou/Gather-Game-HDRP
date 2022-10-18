@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GatherGame.Inventory.Scriptables;
-using GatherGame.Utilities;
-using GatherGame.Inventory.Behaviour;
+using GatherGame.Inventory;
 
 namespace GatherGame.Interaction
 {
     [CreateAssetMenu(fileName = "Lootable Object", menuName = "Interactable Objects/Lootable Object")]
-    public class LootableObjects : InteractableObject
+    public class LootableObject : InteractableObject
     {
         #region Variables
-        [Header("--Inventory & Loot Data--")]
-        public InventoryScriptable inventory;
-        public LootTable lootTable;
-        public int minimumPasses, maximumPasses; // The amount of items the object can generate
+        [MyBox.Separator][Header("--Inventory & Loot Data--")]
+        [SerializeField]private InventoryScriptable inventory;
+        [SerializeField]private LootTable lootTable;
+        [Range(0, 25)]
+        [SerializeField]private int minimumPasses; // The amount of items the object can generate
+        [Range(0, 50)]
+        [SerializeField]private int maximumPasses;
         #endregion
 
         #region Methods
@@ -23,26 +24,22 @@ namespace GatherGame.Interaction
             return Random.Range(minimumPasses, maximumPasses);
         }
         
-        public override GameObject interact(GameObject gameObject)
+        public override GameObject interact(GameObject gameObject, Actors.ActorBehaviour actor)
         {
-            InventoryBehaviour behaviour = gameObject.GetComponentInChildren<InventoryBehaviour>();
+            InventoryBehaviour behaviour = gameObject.GetComponentInChildren<InventoryBehaviour>(true);
 
             if (behaviour == null)
             {
-                if (hasBlocker(gameObject))
-                    createLoot(gameObject.transform, true);   
-                else
-                    createLoot(gameObject.transform, false);
+                behaviour = createLoot(gameObject.transform, hasBlocker(gameObject));
 
-                Inventory.InventoryManager.inventories.Add(behaviour);
-                Inventory.InventoryManager.currentBackpack.openInventory();
+                InventoryManager.Instance.inventories.Add(behaviour);
+                actor.GetComponentInChildren<InventoryBehaviour>(true).ToggleInventory();
             }
             else
             {
-                behaviour.openInventory();
-                Inventory.InventoryManager.currentBackpack.openInventory();
+                actor.GetComponentInChildren<InventoryBehaviour>(true).ToggleInventory();
+                behaviour.ToggleInventory();
             }
-
             return gameObject;
         }
 
@@ -62,43 +59,27 @@ namespace GatherGame.Interaction
         }
 
         #region Create Prefab
-        public GameObject createLoot(Transform parent, bool persistant)
+        public InventoryBehaviour createLoot(Transform parent, bool persistant)
         {
-            GameObject inventoryGO = inventory.createInventory();
+            GameObject inventoryGO = inventory.CreateInventory(parent);
 
             InventoryBehaviour behaviour = 
                 inventoryGO.GetComponent<InventoryBehaviour>();
-
-            inventoryGO.transform.SetParent(parent);
-            inventoryGO.transform.localPosition = new Vector2((-Screen.width / 2) / 4, 0);
+            inventoryGO.transform.localPosition = new Vector2(200, 0);
 
             if (persistant)
-                return inventoryGO;
+                return behaviour;
 
             lootLoop(behaviour);
-            return inventoryGO;
+            return behaviour;
         }
 
         private void lootLoop(InventoryBehaviour behaviour)
         {
             for (int i = 0; i < getRandomRange(); i++)
             {
-                object item = lootTable.getRandomItem();
-                if (typeof(GenericItem).IsAssignableFrom(item.GetType()))
-                {
-                    GameObject obj = behaviour.spawnGhostItem(item);
-
-                    if (typeof(HarvestableItem).IsAssignableFrom(item.GetType()))
-                    {
-                        HarvestableItemBehaviour itemBehaviour = obj.GetComponent<HarvestableItemBehaviour>();
-                        ((HarvestableItem)item).setRandomQuality(itemBehaviour, Quality.Average);
-                        ((HarvestableItem)item).createQualityIndicator(obj.transform);
-                    }
-
-                    behaviour.modStackableItem((GenericItem)item, 1, obj);
-                }
-                else
-                    behaviour.spawnItem((ItemClass)item);
+                ItemScriptable item = lootTable.getRandomItem();
+                item.CreateItem(behaviour);
             }
         }
 

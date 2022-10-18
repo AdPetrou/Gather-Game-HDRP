@@ -1,6 +1,6 @@
 {
     "name": "Game",
-    "rootNamespace": "",
+    "rootNamespace": "GatherGame",
     "references": [
         "GUID:dd1203026bad1e64f9365e5f939cce3a",
         "GUID:4c25c05f410a3a447a75c3b0909152ef",

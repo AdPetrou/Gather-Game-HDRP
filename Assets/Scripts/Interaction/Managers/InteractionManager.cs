@@ -41,7 +41,7 @@ namespace GatherGame.Interaction
 
             }
         }
-
+        
 
         private void Update()
         {
@@ -55,7 +55,7 @@ namespace GatherGame.Interaction
         public InteractableObject GetObjectFromTag(string tag)
         {
             foreach(InteractableObject obj in InteractableObjects)
-                if (obj.prefab.tag == tag)
+                if (obj.GetTag() == tag)
                     return obj;
 
             return null;

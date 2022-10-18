@@ -6,7 +6,7 @@ namespace GatherGame.UI
 {
     public class DestroyItem : MonoBehaviour
     {
-        private Inventory.Behaviour.ItemBehaviour item;
+        private Inventory.ItemBehaviour item;
 
         public void disableThis()
         {
@@ -14,16 +14,16 @@ namespace GatherGame.UI
         }
         public void destroyItem()
         {
-            item.destroyItem(item.transform.GetComponentInParent<Inventory.Behaviour.InventoryBehaviour>(true));
+            //item.destroyItem(item.transform.GetComponentInParent<Inventory.InventoryBehaviour>(true));
             disableThis();
         }
-        public void setItem(Inventory.Behaviour.ItemBehaviour _item)
+        public void setItem(Inventory.ItemBehaviour _item)
         {
             item = _item;
         }
         public void setItem(GameObject _item)
         {
-            item = _item.GetComponent<Inventory.Behaviour.ItemBehaviour>();
+            item = _item.GetComponent<Inventory.ItemBehaviour>();
         }
     }
 }

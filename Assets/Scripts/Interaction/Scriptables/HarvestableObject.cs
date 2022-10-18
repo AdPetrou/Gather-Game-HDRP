@@ -10,8 +10,8 @@ namespace GatherGame.Interaction
     public class HarvestableObject : InteractableObject
     {
         #region Variables
-        [SerializeField]
-        internal HarvestDrop[] items;
+        [MyBox.Separator][Header("--Harvestable Data--")]
+        [SerializeField]internal HarvestDrop[] items;
 
         public override void OnValidate()
         {
@@ -24,7 +24,7 @@ namespace GatherGame.Interaction
         {
             return Random.Range(items[index].minDrop, items[index].maxDrop);
         }
-        public int getDropAmount(HarvestableItem item)
+        public int getDropAmount(HarvestableItemScriptable item)
         {
             for(int index = 0; index < items.Length; index++)
                 if(item.Equals(items[index]))
@@ -35,36 +35,35 @@ namespace GatherGame.Interaction
         #endregion
 
         #region Methods
-        public override GameObject interact(GameObject gameObject)
+        public override GameObject interact(GameObject gameObject, Actors.ActorBehaviour actor)
         {
             gameObject.SetActive(false);
             InteractionManager.Instance.Timer.CreateTimer(gameObject, respawnTime);
 
-            //for (int i = 0; i < items.Length; i++)           
-            //Inventory.InventoryManager.currentBackpack.modStackableItem(items[i].item, getDropAmount(i), setQuality(i));
+            for (int i = 0; i < items.Length; i++)    
+                for(int u = 0; u < items[i].GetDrop(); u++)
+                    items[i].item.CreateItem(actor.GetComponentInChildren<Inventory.InventoryBehaviour>(true));
 
             return gameObject;
-        }
-
-        public GameObject setQuality(int index)
-        {
-            GameObject ghostObj = Inventory.InventoryManager.currentBackpack.spawnGhostItem(items[index].item);
-            items[index].item.setQualityFromSkill(ghostObj.GetComponent<HarvestableItemBehaviour>());
-            return ghostObj;
         }
         #endregion
 
         [System.Serializable]
         internal struct HarvestDrop
         {
-            public HarvestableItem item;
+            public HarvestableItemScriptable item;
             public int minDrop, maxDrop;
 
-            public HarvestDrop(HarvestableItem _item, int _minDrop, int _maxDrop)
+            public HarvestDrop(HarvestableItemScriptable _item, int _minDrop, int _maxDrop)
             {
                 item = _item;
                 minDrop = _minDrop;
                 maxDrop = _maxDrop;
+            }
+
+            public int GetDrop()
+            {
+                return Random.Range(minDrop, maxDrop + 1);
             }
         }
     }

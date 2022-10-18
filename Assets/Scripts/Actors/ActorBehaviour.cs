@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Jobs;
 using Unity.Collections;
-using GatherGame.Actors.Stats;
 using MyBox;
 
 namespace GatherGame.Actors 
@@ -107,7 +106,7 @@ namespace GatherGame.Actors
                     resultObj = result.transform.gameObject;
                 Dispose();  // Native Arrays need to be disposed quickly after being created to avoid Memory Leaks
 
-                // Callbacks the result to set in the class
+                // Sends the result back
                 thisObject(resultObj);
                 yield return new WaitForSeconds(0.2f);  
                 // This waits before returning true to give some downtime to the Jobs and stop 100s of jobs a second

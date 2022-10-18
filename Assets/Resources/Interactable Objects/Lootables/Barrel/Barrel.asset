@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c625b994e41c6244ada077dbe4e3a3a, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Barrel
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Game:GatherGame.Interaction:LootableObject
+  layer: 6
   prefab: {fileID: 5591640233965464959, guid: 1b014b368250ecf4daae22cf45bec194, type: 3}
   type: 8
   expGain: 500
-  harvestTime: 2
-  respawnTime: 1
+  interactTime: 5
+  respawnTime: 20
   harvestDistance: 2
   inventory: {fileID: 11400000, guid: 8d59ed2213949c048940a113fd152c2a, type: 2}
   lootTable: {fileID: 11400000, guid: 7ef54cac78b71834ca5b744a3b86d445, type: 2}
-  lootRange:
-    a: 5
-    b: 6
+  minimumPasses: 1
+  maximumPasses: 5

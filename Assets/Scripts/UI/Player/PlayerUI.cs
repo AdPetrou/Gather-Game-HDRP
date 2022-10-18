@@ -45,7 +45,8 @@ namespace GatherGame.UI
             {
                 enableHarvestUI(behaviour.interactableObject.transform.position + Vector3.up);
                 if (behaviour.CurrentState.StateRef == StateType.Interact)
-                    runHarvestUI(Interaction.InteractionManager.Instance.GetObjectFromTag(behaviour.interactableObject.tag).interactTime);
+                    runHarvestUI(Interaction.InteractionManager.Instance.GetObjectFromTag
+                        (behaviour.interactableObject.tag).GetInteractTime());
             }
             else
                 disableHarvestUI();
@@ -53,15 +54,15 @@ namespace GatherGame.UI
 
         public void enableHarvestUI(Vector3 position)
         {
-            harvestUI.enable(position);
+            harvestUI.Enable(position);
         }
         public void disableHarvestUI()
         {
-            harvestUI.disable();
+            harvestUI.Disable();
         }
         public void runHarvestUI(int time)
         {
-            StartCoroutine(harvestUI.fillUI(time));
+            StartCoroutine(harvestUI.FillUI(time));
         }
 
         public void enableDropItemPopup(ItemBehaviour item)
@@ -73,13 +74,8 @@ namespace GatherGame.UI
         public void inventoryPressed()
         {
             StartCoroutine(PlayerBehaviour.disableMovement(0.5f));
-            if (!InventoryManager.currentBackpack.status)
-            {
-                InventoryManager.currentBackpack.openInventory();
-                return;
-            }
-
-            InventoryManager.currentBackpack.closeInventory(false);
+            InventoryBehaviour inventory = transform.GetComponentInChildren<InventoryBehaviour>(true);
+            inventory.ToggleInventory();
         }
 
         public void playerStatsPressed()
@@ -109,18 +105,9 @@ namespace GatherGame.UI
 
         public void closeInventories()
         {
-            Inventory.Behaviour.InventoryBehaviour[] inventories = FindObjectsOfType<Inventory.Behaviour.InventoryBehaviour>();
-            if (inventories.Length < 2 && !InventoryManager.currentBackpack.status)
-                return;
-
-            for (int i = 0; i < inventories.Length; i++)
-            {
-                if (inventories[i] == InventoryManager.currentBackpack
-                    && InventoryManager.currentBackpack.status)
-                    inventories[i].closeInventory(false);
-                else
-                    inventories[i].closeInventory();
-            }
+            foreach (InventoryBehaviour inventory in InventoryManager.Instance.inventories)
+                if (inventory.transform.parent.gameObject.activeSelf)
+                    inventory.ToggleInventory();
         }
     }
 }
