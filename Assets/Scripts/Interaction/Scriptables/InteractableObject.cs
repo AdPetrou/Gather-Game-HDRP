@@ -14,13 +14,13 @@ namespace GatherGame.Interaction
         [MyBox.Separator][Header("--Experience Data--")]
         [SerializeField] protected SkillType type = SkillType.None;
         [SerializeField] protected float expGain;
-        [MyBox.Separator][Header("--Harvest Data--")]
+        [MyBox.Separator][Header("--Interact Data--")]
         [SerializeField] protected int interactTime;
         [SerializeField] protected int respawnTime;
-        [SerializeField] protected float harvestDistance;
+        [SerializeField] protected float interactDistance;
 
-        public abstract GameObject interact(GameObject interactable, Actors.ActorBehaviour actor);
-        public float GetDistance() { return harvestDistance; }
+        public abstract GameObject Interact(GameObject interactable, Actors.ActorBehaviour actor);
+        public float GetDistance() { return interactDistance; }
         public int GetRespawnTime() { return respawnTime; }
         public int GetInteractTime() { return interactTime; }
         public string GetTag() { return prefab.tag; }

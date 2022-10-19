@@ -30,7 +30,7 @@ namespace GatherGame.Actors
 
             Animate(behaviour.animationController, 0.25f);
             yield return new WaitForSeconds(thisObject.GetInteractTime());
-            thisObject.interact(obj, behaviour);
+            thisObject.Interact(obj, behaviour);
             // This calls the Behaviour to run the Raycast Job again to reset the closest Interactable Object
             behaviour.GetInteractableObject(true); 
 

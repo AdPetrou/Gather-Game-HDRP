@@ -24,7 +24,7 @@ namespace GatherGame.Interaction
             return Random.Range(minimumPasses, maximumPasses);
         }
         
-        public override GameObject interact(GameObject gameObject, Actors.ActorBehaviour actor)
+        public override GameObject Interact(GameObject gameObject, Actors.ActorBehaviour actor)
         {
             InventoryBehaviour behaviour = gameObject.GetComponentInChildren<InventoryBehaviour>(true);
 

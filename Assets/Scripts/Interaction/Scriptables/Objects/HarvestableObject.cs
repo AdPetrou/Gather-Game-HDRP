@@ -34,7 +34,7 @@ namespace GatherGame.Interaction
         #endregion
 
         #region Methods
-        public override GameObject interact(GameObject gameObject, Actors.ActorBehaviour actor)
+        public override GameObject Interact(GameObject gameObject, Actors.ActorBehaviour actor)
         {
             gameObject.SetActive(false);
             InteractionManager.Instance.Timer.CreateTimer(gameObject, respawnTime);
