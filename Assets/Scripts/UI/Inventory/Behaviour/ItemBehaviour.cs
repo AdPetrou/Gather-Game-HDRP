@@ -1,17 +1,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using GatherGame.Utilities;
 using GatherGame.UI;
 using System.Collections.Generic;
-using UnityEditor.Sprites;
 
 namespace GatherGame.Inventory
 {
     public class ItemBehaviour : DraggableUI
     {
         #region Variables
-        public Tuple<InventoryBehaviour, List<Tuple<int, int>>> usedSlots { get; protected set; }
+        public Tuple<InventoryBehaviour, List<Tuple<int, int>>> usedSlots { get; private set; }
         /* The usedSlots take the inventory and the position of all the slots the item inhibits, as a tuple.
         The list of slots is used in the inventory to check if a slot is filled when adding or moving other items. */
         public void SetUsedSlots(InventoryBehaviour inventory, List<Tuple<int, int>> usedSlots)        
@@ -30,10 +28,9 @@ namespace GatherGame.Inventory
 
         public virtual void SpawnItem(ItemScriptable scriptable, InventoryBehaviour inventory)
         {
-            width = scriptable.objectSize.Item1; height = objectSize.Item2;
-            bool success = inventory.AddItemToSlot(this);
-            if(success)
-                rectTransform.localPosition = GetPosition();
+            width = scriptable.objectSize.Item1; height = scriptable.objectSize.Item2;
+            inventory.AddItemToSlot(this);
+            rectTransform.localPosition = GetPosition();
         }
         #endregion
 

@@ -2,7 +2,6 @@ using UnityEngine;
 using Unity.Collections;
 using GatherGame.Utilities;
 using GatherGame.Inventory.Scriptables;
-using GatherGame.Inventory.Behaviour;
 
 namespace GatherGame.Interaction
 { 

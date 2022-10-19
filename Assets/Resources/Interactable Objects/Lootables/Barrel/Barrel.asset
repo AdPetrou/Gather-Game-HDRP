@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 3c625b994e41c6244ada077dbe4e3a3a, type: 3}
   m_Name: Barrel
-  m_EditorClassIdentifier: Game:GatherGame.Interaction:LootableObject
+  m_EditorClassIdentifier: 
   layer: 6
   prefab: {fileID: 5591640233965464959, guid: 1b014b368250ecf4daae22cf45bec194, type: 3}
   type: 8
